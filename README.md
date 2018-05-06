@@ -1,5 +1,5 @@
 # votca_helper
-Helper scripts for VOTCA CSG
+Helper scripts for [VOTCA-CSG](http://www.votca.org)
 
 VOTCA runs GROMACS, but VOTCA's utilities themselves are only multithreaded.
 
