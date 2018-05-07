@@ -24,7 +24,8 @@ def generate_hostfile(pe_hostfile):
 def fix_settings_xml(ompi_hostfile):
     '''Fix VOTCA CSG settings.xml file'''
     settings = xml.dom.minidom.parse('settings.xml')
-    settings.getElementsByTagName('command')[0].childNodes[0].data = '/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpirun -x LD_LIBRARY_PATH -x BASH_ENV --hostfile {} gmx_mpi mdrun'.format(ompi_hostfile)
+    ### read environment variable MPI_RUN for full path to mpirun command
+    settings.getElementsByTagName('command')[0].childNodes[0].data = '{} -x LD_LIBRARY_PATH -x BASH_ENV --hostfile {} gmx_mpi mdrun'.format(os.getenv('MPI_RUN'), ompi_hostfile)
 
     ### XXX caution - this overwrites the settings.xml file
     with open('settings.xml', 'w') as f:
